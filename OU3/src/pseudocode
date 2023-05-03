@@ -1,0 +1,136 @@
+if(currentStation==destination) //going to the same station
+        throw error;
+
+    switch(currentStation) {
+        case 0:
+            currentZone = 1;
+            break;
+        case 1:
+            currentZone = 2;
+            break;
+        case 2:
+            currentZone = 2;
+            break;
+        case 3:
+            currentZone = 2;
+            break;
+        case 4:
+            currentZone = 3;
+            break;
+        case 5:
+            currentZone = 3;
+            break;
+        case 6:
+            currentZone = 3;
+            break;
+        case 7:
+            currentZone = 3;
+            break;
+        case 8:
+            currentZone = 4;
+            break;
+    }
+    switch(destination) {
+        case 0:
+            destinationZone = 1;
+            break;
+        case 1:
+            destinationZone = 2;
+            break;
+        case 2:
+            destinationZone = 2;
+            break;
+        case 3:
+            destinationZone = 2;
+            break;
+        case 4:
+            destinationZone = 3;
+            break;
+        case 5:
+            destinationZone = 3;
+            break;
+        case 6:
+            destinationZone = 3;
+            break;
+        case 7:
+            destinationZone = 3;
+            break;
+        case 8:
+            destinationZone = 4;
+            break;
+
+    }
+    if(currentZone==destinationZone) //going to the same zone
+        throw error;
+
+    if(currentZone>destinationZone) { // managing descending trips
+        swap(currentStation, destinationStation);
+    }
+
+    int tempIndex = 2; // in case we have a descending trip so we write the stations backwards to the array
+    if(!swappedValues) {
+        stations[0] = currentStation; //and the indexing starts from 0
+        tempIndex = 1;
+    } else {
+        stations[3] = currentStation;
+    }
+
+
+    for(i=currentZone; i<destinationZone; i++){
+        stationIndex = currentStation;
+        searchArray = b[stationIndex];
+
+        for(k=0; k<searchArray.length; k++) { // we find the first non zero value in the row
+            if(searchArray[k]!=0) {
+                min=searchArray[k];
+                currentStation = k;
+                break;
+            }
+        }
+
+        for(j=0; j<searchArray.length; j++) {
+            if(currentZone==1 && j>=1 && j<=3 && ((j<currentStation && swappedValues) || (j>currentStation && !swappedValues) ) && searchArray[j]<=min && searchArray[j]!=0 && zonesToPass!=1) {
+                min=searchArray[j];
+                currentStation = j;
+            }
+
+            else if(currentZone==2 && j>=4 && j<=7 && ((j<currentStation && swappedValues) || (j>currentStation && !swappedValues) ) && searchArray[j]<=min && searchArray[j]!=0 && zonesToPass!=1) {
+                min=searchArray[j];
+                currentStation = j;
+
+            }
+
+            else if(currentZone==3 && j>=1 && j<=3 || j==8 && ((j<currentStation && swappedValues) ||(j>currentStation && !swappedValues) ) && searchArray[j]<=min && searchArray[j]!=0 && zonesToPass!=1) {
+                min=searchArray[j];
+                currentStation = j;
+
+            }
+
+            else if(currentZone==4 && j>=4 && j<=7 && ((j<currentStation && swappedValues) || (j>currentStation && !swappedValues)) && searchArray[j]<=min && searchArray[j]!=0 && zonesToPass!=1) {
+                min=searchArray[j];
+                currentStation = j;
+            }
+
+            else if (zonesToPass == 1) {
+                min = searchArray[destination];
+                currentStation = destination;
+                j=searchArray.length-1;
+            }
+
+
+            if(j==searchArray.length-1) {
+                stationIndex = currentStation;
+                stationsPassed++;
+                zonesToPass--;
+                stations[tempIndex] = currentStation;
+                if(!swappedValues) {
+                    tempIndex++;
+                    currentZone++;
+                }
+
+                else {
+                    tempIndex--;
+                    currentZone--;
+                }
+            }
+        }
