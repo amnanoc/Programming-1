@@ -29,14 +29,6 @@ __Extra assignments__
 2. Run them in IDE of your choice (IntelliJ, Eclipse...)
 
 
-## Getting Started
-
-To use the projects, simply download the assignments and run them in an IDE of your choice, such as IntelliJ or Eclipse.
-
-## Contributing
-
-Contributions to this repository are greatly appreciated. If you have a suggestion that could improve the code, please feel free to fork the repository and create a pull request. You can also open an issue with the "enhancement" tag. Don't forget to give the project a star if you find it useful. Thank you for your contributions!
-
 ## Built With
 
 * [Java](https://www.java.com/en/) 
